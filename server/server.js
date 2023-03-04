@@ -9,3 +9,10 @@ app.listen(PORT, () => {
 });
 
 app.use(express.static('server/public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.post('/calculator' , (req, res) => {
+    console.log('in /calculator POST:', req.body);
+    res.sendStatus(201);
+})
+
