@@ -12,22 +12,15 @@ let secondNumberInput = '';
 function onReady(){
     console.log('Inside onReady Function');
     $('.btn').on('click', userSelectedInputs);
-    historyLogs();
+   historyLogsGET();
     $('#deleteBtn').on('click', onDeleteBtn);
-    
-
-
-  
+     
 }
 // function enterCalculations (event){
 //     console.log('inside enterCalculations function');
 
 
 // }
-function render (){
-    console.log('Inside the render function');
-}
-
 
 // GET to retrieve calculated result 
 function getResults() {
@@ -35,7 +28,7 @@ function getResults() {
       method: 'GET',
       url: '/calculator',
     }).then(function (response) {
-      calculatedResult = response.result;
+      calculations = response.result;
       historyLogs();
     });
   }
@@ -101,12 +94,13 @@ function userSelectedInputs() {
       secondNumberInput = secondNumberInput.concat(buttonClicked);
     }
   }
-  function historyLogs() {
+
+  function historyLogsGET() {
     $.ajax({
       method: 'GET',
       url: '/historyLog',
     }).then(function (response) {
-      console.log('inside historyLogs', response);
+      console.log('inside historyLogsGET', response);
       historyLogs = response;
   
       // then call the render() to display the result on DOM
@@ -117,6 +111,24 @@ function userSelectedInputs() {
     historyLogs = [];
     $('#historyLogs').empty();
   }
+  function render() {
+    console.log('historyLogs', historyLogs);
+    // create list  element will show the history log
+    let history = '';
+    for (let i = 0; i < historyLogs.length; i++) {
+      let log = historyLogs[i];
+      console.log('render log: ', log);
+      history += `
+      <li>${log.firstNumberInput} ${log.mathInputs} ${log.secondNumberInput} = ${log.calculations}</li>
+      `;
+    }
+        $('#historyLogs').empty();
+        $('#resultDisplay').empty();
+
+    // Display the history on the DOM
+    $('#historyLogs').append(history);
+    $('.calculator').val( );
+}
 
   
 
