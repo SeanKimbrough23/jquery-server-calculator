@@ -2,6 +2,7 @@ console.log('READY TO GO');
 
 $(document).ready(onReady);
 
+let historyLogs = [];
 let currentNumberInputs = '';
 let mathInputs = '';
 let firstNumberInput = '';
@@ -10,16 +11,19 @@ let secondNumberInput = '';
 
 function onReady(){
     console.log('Inside onReady Function');
- $('#resultBtn').on('click' , calculator);
+    $('.btn').on('click', userSelectedInputs);
+    historyLogs();
+    $('#deleteBtn').on('click', onDeleteBtn);
+    
 
 
   
 }
-function enterCalculations (event){
-    console.log('inside enterCalculations function');
+// function enterCalculations (event){
+//     console.log('inside enterCalculations function');
 
 
-}
+// }
 function render (){
     console.log('Inside the render function');
 }
@@ -41,7 +45,7 @@ function getResults() {
     let newInputs = {
       firstNumberInput,
       secondNumberInput: secondNumberInput.substring(1),
-      mathInput,
+      mathInputs,
     };
     console.log('in usersInputs', newInputs);
   $.ajax({
@@ -60,46 +64,60 @@ function getResults() {
 function userSelectedInputs() {
     // want the number that is being clicked on
     const buttonClicked = $(this)[0].innerText;
-    if (mathInput === '') {
+    if (mathInputs === '') {
       firstNumberInput = currentNumberInputs;
-    }
-  
-    if (
-      inputClicked === '+' ||
-      inputClicked === '-' ||
-      inputClicked === '*' ||
-      inputClicked === '/'
+    } if ( buttonClicked === '+' ||
+      buttonClicked === '-' ||
+      buttonClicked === '*' ||
+      buttonClicked === '/'
     ) {
-      if (mathInput !== '') {
+      if (mathInputs !== '') {
         return;
       }
-      mathInput = buttonClicked;
+      mathInputs = buttonClicked;
     }
     currentNumberInputs = currentNumberInputs.concat(buttonClicked);
     if (buttonClicked === '=') {
       usersInputs();
-      $('.calculator-screen').val('');
+      $('.calculator').val('');
       currentNumberInputs = '';
-      mathInput = '';
+      mathInputs = '';
       firstNumberInput = '';
       secondNumberInput = '';
     } else {
-      $('.calculator-screen').val(currentNumberInputs);
+      $('.calculator').val(currentNumberInputs);
     }
   
     if (buttonClicked === 'Clear') {
-      $('.calculator-screen').val('');
+      $('.calculator').val('');
       currentNumberInputs = '';
-      mathInput = '';
+      mathInputs = '';
       firstNumberInput = '';
       secondNumberInput = '';
       $('#resultDisplay').empty();
     }
   
-    if (mathInput !== '') {
+    if (mathInputs !== '') {
       secondNumberInput = secondNumberInput.concat(buttonClicked);
     }
   }
+  function historyLogs() {
+    $.ajax({
+      method: 'GET',
+      url: '/historyLog',
+    }).then(function (response) {
+      console.log('inside historyLogs', response);
+      historyLogs = response;
+  
+      // then call the render() to display the result on DOM
+      render();
+    });
+  }
+  function onDeleteBtn() {
+    historyLogs = [];
+    $('#historyLogs').empty();
+  }
+
   
 
 
@@ -150,7 +168,7 @@ function userSelectedInputs() {
 //         data: result
 //     });
 
-}
+
 // let result = calculator(5, 3, '+');
 // console.log(result); 
 
