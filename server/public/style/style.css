@@ -1,0 +1,97 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .calculator {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    margin-bottom: 10px;
+    width: 240px;
+    color: red;
+  }
+  
+  .calculator input[type="text"] {
+    grid-column: 1 / span 4;
+    text-align: right;
+    font-size: 24px;
+    padding: 5px;
+    
+  }
+  
+  .calculator button {
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 5px;
+  }
+  
+  .btn-outline-warning {
+    background-color: black;
+    color: red;
+    border: 1px solid red;
+  }
+  
+  .btn-outline-warning:hover {
+    background-color: black;
+    color: red;
+  }
+  
+  .btn-secondary {
+    background-color: #eee;
+    color: black;
+    border: 1px solid #ccc;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #ccc;
+    color: black;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: red;
+  }
+  
+  .btn-danger:hover {
+    background-color:red;
+    color: white;
+    border: red;
+  }
+  
+  .btn-primary {
+    background-color: red;
+    color: white;
+    border: red;
+  }
+  
+  .btn-primary:hover {
+    background-color: white;
+    color: red;
+    border: red;
+  }
+  
+  #deleteBtn {
+    margin-top: 20px;
+   align-items: center;
+   color: red;
+   background-color: navajowhite;
+  }
+h1{
+    text-align: center;
+    text-decoration: dotted;
+    border-color: #dc3545;
+    outline-color: #dc3545;
+    text-decoration-color: #dc3545;
+    
+    
+}
+body{
+    background-color: bisque;
+
+}
+
