@@ -29,7 +29,7 @@ function getResults() {
       url: '/calculator',
     }).then(function (response) {
       calculations = response.result;
-      historyLogs();
+      historyLogsGET();
     });
   }
 
