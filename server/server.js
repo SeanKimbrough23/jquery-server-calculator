@@ -27,11 +27,11 @@ function calculator (firstNumberInput, secondNumberInput, operator) {
             calculations = 'Invalid Operator';
     }
     return calculations;
-}
+} // function to take in user number inputs with operator input to do basic math.
 
 app.listen(PORT, () => {
     console.log('Server up and running:', PORT);
-});
+}); // made to listen to PORT 5000
 
 app.use(express.static('server/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -59,7 +59,7 @@ app.post('/calculator' , (req, res) => {
     });
 
     res.sendStatus(201);
-});
+}); // POST request 
 
 app.get('/historyLog', (req, res) => {
     console.log('historyLogs: ', historyLogs);
